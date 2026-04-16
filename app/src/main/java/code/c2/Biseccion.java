@@ -57,4 +57,8 @@ public class Biseccion {
     System.out.println();
     System.out.println(Chalk.bgGreen("La interseccion es: " + result));
   }
+
+  static double f(double x) {
+    return Math.exp(3 * x) - 4;
+  }
 }
