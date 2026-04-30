@@ -8,14 +8,14 @@ public class Consola {
     this.sc = new Scanner(System.in);
   }
 
-  public String getString(String label, String defaultFun) {
+  public String getString(String label, String _default) {
     System.out.print(
       Chalk.bold(label) +
-      Chalk.gray(" (default: " + defaultFun + ") ") + ": "
+      Chalk.gray(" (default: " + _default + ") ") + ": "
     );
     String str = sc.nextLine().trim();
 
-    return str.equals("") ? defaultFun : str;
+    return str.equals("") ? _default : str;
   }
 
   public String getString(String label) {
@@ -32,5 +32,50 @@ public class Consola {
       return sc.nextDouble();
     }
     catch (Exception err) { throw new Error("Ingrese un número valido."); }
+  }
+
+  public int getInteger(String label, int _default) {
+    System.out.print(
+      Chalk.bold(label) +
+      Chalk.gray(" (default: " + _default + ") ") + ": "
+    );
+    String str = sc.nextLine().trim();
+
+    try {
+      return str.equals("") ? _default : Integer.parseInt(str);
+    } catch (Exception e) { throw new Error("Ingresa un numero valido"); }
+  }
+
+  public int getInteger(String label) {
+    System.out.print(Chalk.bold(label) + ": ");
+    try {
+      return sc.nextInt();
+    } catch (Exception err) { throw new Error("Imgrese un numero valido."); }
+  }
+
+  public boolean getBoolean(String label) {
+    System.out.print(Chalk.bold(label) + " (y/n): ");
+    String asnwer = sc.nextLine();
+
+    return asnwer.equals("y") ? true : false;
+  }
+
+  public double[][] getMatriz(int n) {
+    double[][] matriz = new double[n][n + 1];
+
+    for (int i = 0; i < n; i++) {
+      System.out.println();
+      System.out.println(Chalk.bgBlue("  Ecuacion" + (i + 1) + "  "));
+      for (int j = 0; j < n + 1; j++) {
+        String str =
+          j == n
+          ? String.format("b%d", i + 1)
+          : String.format("a%d%d", i + 1, j + 1);
+
+        matriz[i][j] = this.getDouble(str);
+      }
+    }
+
+    return matriz;
   }
 }
