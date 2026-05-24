@@ -114,12 +114,15 @@ public class GaussJordan {
   }
 
   void muestraDefault() {
-    System.out.println(Chalk.GRAY);
-    System.out.println("----- DEFAULT -----");
-    System.out.println("x - y + 3z = 13");
-    System.out.println("x + y + z = 11");
-    System.out.println("2x + 2y - z = 7");
-    System.out.println(Chalk.RESET);
+    System.out.println(Chalk.BOLD + Chalk.GRAY);
+    System.out.println("""
+      +---------- DEFAULT ----------+
+      |  x - y + 3z = 13            |
+      |  x + y + z = 11             |
+      |  2x + 2y - z = 7            |
+      +-----------------------------+
+    """);
+    System.out.print(Chalk.RESET);
   }
 
   void printTitle() {

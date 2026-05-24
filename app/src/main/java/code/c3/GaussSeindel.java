@@ -146,16 +146,19 @@ public class GaussSeindel {
   }
 
   void muestraDefault() {
-    System.out.println(Chalk.GRAY);
-    System.out.println("----- DEFAULT -----");
-    System.out.println("6x - 4y + 2z = 4");
-    System.out.println("2x + 8y - 2z = 12");
-    System.out.println("14x + 10y - 14z = -18");
-    System.out.println();
-    System.out.println("Tolerancia: 0.01");
-    System.out.println("Iteraciones: 9");
-    System.out.println("Valores iniciales: [0, 0, 0]");
-    System.out.println(Chalk.RESET);
+    System.out.println(Chalk.BOLD + Chalk.GRAY);
+    System.out.println("""
+      +------------ DEFAULT ------------+
+      |  6x - 4y + 2z = 4               |
+      |  2x + 8y - 2z = 12              |
+      |  14x + 10y - 14z = -18          |
+      +---------------------------------+
+      |  Tolerancia: 0.01               |
+      |  Iteraciones: 9                 |
+      |  Valores iniciales: [0, 0, 0]   |
+      +---------------------------------+ 
+    """);
+    System.out.print(Chalk.RESET);
   }
 
   void printTitle() {
