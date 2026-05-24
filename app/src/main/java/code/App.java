@@ -25,54 +25,59 @@ public class App {
       opcion = sc.getString(Chalk.yellow(">> "));
       if (opcion.equals("0")) break;
 
-      switch (opcion) {
-        case "1":
-          while (true) {
-            printMenuErrores();
-            String op = sc.getString(Chalk.yellow(">> "));
-            if (op.equals("0")) break;
+      try {
+        switch (opcion) {
+          case "1":
+            while (true) {
+              printMenuErrores();
+              String op = sc.getString(Chalk.yellow(">> "));
+              if (op.equals("0")) break;
 
-            String errorCompilacionPath = "app/src/main/java/code/c1/ErrorCompilacion.java";
-            String errorEjecucionPath = "app/src/main/java/code/c1/ErrorEjecucion.java";
-            String errorLogicoPath = "app/src/main/java/code/c1/ErrorLogico.java";
+              String errorCompilacionPath = "app/src/main/java/code/c1/ErrorCompilacion.java";
+              String errorEjecucionPath = "app/src/main/java/code/c1/ErrorEjecucion.java";
+              String errorLogicoPath = "app/src/main/java/code/c1/ErrorLogico.java";
 
-            try {
-              switch (op) {
-                case "1":
-                  printCodeFile(errorEjecucionPath);
-                  ErrorEjecucion.main(args);
-                  break;
-                  
-                  case "2":
-                  printCodeFile(errorCompilacionPath);
-                  CompilarError.main(args);
-                  break;
-                  
-                case "3":
-                  printCodeFile(errorLogicoPath);
-                  ErrorLogico.main(args);
-                  break;
+              try {
+                switch (op) {
+                  case "1":
+                    printCodeFile(errorEjecucionPath);
+                    ErrorEjecucion.main(args);
+                    break;
+                    
+                    case "2":
+                    printCodeFile(errorCompilacionPath);
+                    CompilarError.main(args);
+                    break;
+                    
+                  case "3":
+                    printCodeFile(errorLogicoPath);
+                    ErrorLogico.main(args);
+                    break;
 
-                default:
-                  System.out.println(Chalk.red("Opción invalida, eliga nuevamente."));
-                  break;
+                  default: throw new Error("Opción invalida, eliga nuevamente.");
+                }
+              } catch (ArithmeticException e) {
+                System.out.print(Chalk.BOLD + Chalk.RED);
+                e.printStackTrace();
+                System.out.println(Chalk.RESET);
               }
-            } catch (ArithmeticException e) {
-              System.out.print(Chalk.BOLD + Chalk.RED);
-              e.printStackTrace();
-              System.out.println(Chalk.RESET);
             }
-          }
-          break;
+            break;
 
-        case "2": Biseccion.main(args); break;
-        case "3": InterpolacionNewton.main(args); break;
-        case "4": GaussJordan.main(args); break;
-        case "5": GaussSeindel.main(args); break;
-      
-        default:
-          System.out.println(Chalk.red("Opción invalida, eliga nuevamente."));
-          break;
+          case "2": Biseccion.main(args); break;
+          case "3": InterpolacionNewton.main(args); break;
+          case "4": GaussJordan.main(args); break;
+          case "5": GaussSeindel.main(args); break;
+        
+          default: throw new Error("Opción invalida, eliga nuevamente.");
+        }
+
+      } catch (ArithmeticException e) {
+        System.out.print(Chalk.BOLD + Chalk.RED);
+        e.printStackTrace();
+        System.out.println(Chalk.RESET);
+      } catch (Error e) {
+        System.out.println(Chalk.bold(Chalk.red(e.getMessage())));
       }
 
       if (!opcion.equals("1")) {
