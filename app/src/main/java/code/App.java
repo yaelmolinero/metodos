@@ -13,6 +13,7 @@ import code.c2.Biseccion;
 import code.c2.InterpolacionNewton;
 import code.c3.GaussJordan;
 import code.c3.GaussSeindel;
+import code.c4.PolinomioNewton;
 
 public class App {
   public static void main(String[] args) {
@@ -68,6 +69,7 @@ public class App {
           case "3": InterpolacionNewton.main(args); break;
           case "4": GaussJordan.main(args); break;
           case "5": GaussSeindel.main(args); break;
+          case "6": PolinomioNewton.main(args); break;
         
           default: throw new Error("Opción invalida, eliga nuevamente.");
         }

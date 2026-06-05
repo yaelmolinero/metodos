@@ -2,7 +2,7 @@ package code.utils;
 import java.util.Scanner;
 
 public class Consola {
-  private Scanner sc;
+  public Scanner sc;
 
   public Consola() {
     this.sc = new Scanner(System.in);
@@ -22,7 +22,7 @@ public class Consola {
     System.out.print(Chalk.bold(label));
     String str = sc.nextLine();
 
-    if (str.trim().equals("")) throw new Error("Ingresa una función valida.");
+    if (str.trim().equals("")) throw new Error("Ingrese una cadena valida.");
     return str;
   }
 
@@ -39,7 +39,7 @@ public class Consola {
       Chalk.bold(label) +
       Chalk.gray(" (default: " + _default + ") ") + ": "
     );
-    String str = sc.nextLine().trim();
+    String str = sc.nextLine();
 
     try {
       return str.equals("") ? _default : Integer.parseInt(str);
@@ -87,5 +87,9 @@ public class Consola {
   public void waitUntilEnter() {
     System.out.println("Presione ENTER para continuar...");
     sc.nextLine();
+  }
+
+  public void close() {
+    sc.close();
   }
 }
