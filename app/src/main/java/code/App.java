@@ -14,6 +14,7 @@ import code.c2.InterpolacionNewton;
 import code.c3.GaussJordan;
 import code.c3.GaussSeindel;
 import code.c4.PolinomioNewton;
+import code.c4.Lagrange;
 
 public class App {
   public static void main(String[] args) {
@@ -70,6 +71,7 @@ public class App {
           case "4": GaussJordan.main(args); break;
           case "5": GaussSeindel.main(args); break;
           case "6": PolinomioNewton.main(args); break;
+          case "7": Lagrange.main(args); break;
         
           default: throw new Error("Opción invalida, eliga nuevamente.");
         }

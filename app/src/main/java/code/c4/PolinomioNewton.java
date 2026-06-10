@@ -68,7 +68,6 @@ public class PolinomioNewton {
 
     consola.sc.nextLine();
     int x = consola.getInteger("Ingrese el valor para la comprobación", 1);
-    consola.close();
     
     double result = new PolinomioNewton().evaluar(xValues, fxValues, x);
     System.out.println(Chalk.bgGreen("     Pnx = " + result + "     "));
