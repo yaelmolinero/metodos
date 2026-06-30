@@ -1,26 +1,28 @@
 package code.c2;
 
 import code.utils.FuncionDinamica;
+import code.utils.Base;
 import code.utils.Chalk;
 import code.utils.Consola;
 
-public class Biseccion {
+public class Biseccion extends Base {
 
-  public double evaluar(FuncionDinamica f, double a, double b, double err) {
-    System.out.printf("Intervalo (%.2f, %.2f) -> a: %.2f, b: %.2f\n", a, b, a, b);
-    System.out.printf("Error < %.2f%%\n\n", err * 100);
+  public double evaluar(FuncionDinamica f, double a, double b, double tolerancia) {
+    System.out.printf("Intervalo (%.0f, %.0f) -> a: %.0f, b: %.0f\n", a, b, a, b);
+    System.out.printf("Error < %f%%\n\n", tolerancia);
     
     double medio;
     int i = 0;
 
     System.out.printf(
-      Chalk.bold(Chalk.bgBlue("%-2s %-8s %-8s %-10s %-10s %-10s %-10s")),
+      Chalk.bold(Chalk.bgBlue(
+      "%-2s %-8s %-8s %-10s %-10s %-10s %-10s")),
       "i", "a", "b", "f(a)", "f(b)", "f(c)", "E"
     );
     System.out.println();
     
     do {
-      medio = (a + b) / 2;
+      medio = redondear((a + b) / 2);
       double tempA = a, tempB = b;
       i++;
 
@@ -28,7 +30,7 @@ public class Biseccion {
       else a = medio;
 
       System.out.printf(
-        "%-2d %-8.6f %-8.6f %-10.6f %-10.6f %-10.6f %-10.6f\n",
+        "%-2d %-8f %-8f %-10f %-10f %-10f %-10f\n",
         i,
         tempA,
         tempB,
@@ -38,27 +40,25 @@ public class Biseccion {
         (tempB - tempA) / 2
       );
       
-    } while (Math.abs(b - a) > Math.abs(err));
+      System.out.printf(Chalk.purple("%f > %f | %b") + "\n", Math.abs(b - a), Math.abs(tolerancia),  Math.abs(b - a) > Math.abs(tolerancia));
+    } while (Math.abs(b - a) > Math.abs(tolerancia) && i < 16);
 
-    return Math.abs(b - a);
+    return redondear(Math.abs(b - a));
   }
 
   public static void main(String[] args) {
+    printTitle("Bisección");
     Consola consola = new Consola();
 
     String funStr = consola.getString("Ingrese la Funcion", "e^(3x) - 4");
-    double intervaloA = consola.getDouble("Ingrese un valor para Xa: ");
-    double intervaloB = consola.getDouble("Ingrese un valor para Xb: ");
-    double err = consola.getDouble("Ingresa la tolerancia (ej. 0.01): ");
+    double intervaloA = consola.getInteger("Ingrese un valor para Xa: ", 0);
+    double intervaloB = consola.getInteger("Ingrese un valor para Xb: ", 1);
+    double err = consola.getDouble("Ingresa la tolerancia (ej. 0.01): ", false);
     
     FuncionDinamica fun = new FuncionDinamica(funStr);
     double result = new Biseccion().evaluar(fun, intervaloA, intervaloB, err);
 
     System.out.println();
-    System.out.println(Chalk.bgGreen("La interseccion es: " + result));
-  }
-
-  static double f(double x) {
-    return Math.exp(3 * x) - 4;
+    System.out.printf(Chalk.bgGreen("La interseccion es: %f") + "\n", result);
   }
 }

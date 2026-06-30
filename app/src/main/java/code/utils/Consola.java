@@ -1,7 +1,7 @@
 package code.utils;
 import java.util.Scanner;
 
-public class Consola {
+public class Consola extends Base {
   public Scanner sc;
 
   public Consola() {
@@ -27,9 +27,15 @@ public class Consola {
   }
 
   public double getDouble(String label) {
+    return getDouble(label, true);
+  }
+
+  public double getDouble(String label, boolean rounded) {
     System.out.print(Chalk.bold(label) + ": ");
     try {
-      return sc.nextDouble();
+      String num = sc.nextLine();
+      double parsedNum = Double.parseDouble(num);
+      return rounded ? redondear(parsedNum) : parsedNum;
     }
     catch (Exception err) { throw new Error("Ingrese un número valido."); }
   }
@@ -49,7 +55,7 @@ public class Consola {
   public int getInteger(String label) {
     System.out.print(Chalk.bold(label) + ": ");
     try {
-      return sc.nextInt();
+      return Integer.parseInt(sc.nextLine());
     } catch (Exception err) { throw new Error("Imgrese un numero valido."); }
   }
 
