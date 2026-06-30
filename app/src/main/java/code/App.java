@@ -10,7 +10,6 @@ import code.c1.ErrorEjecucion;
 import code.c1.ErrorLogico;
 import code.c1.CompilarError;
 import code.c2.Biseccion;
-import code.c2.InterpolacionNewton;
 import code.c3.GaussJordan;
 import code.c3.GaussSeindel;
 import code.c4.PolinomioNewton;
@@ -67,7 +66,7 @@ public class App {
             break;
 
           case "2": Biseccion.main(args); break;
-          case "3": InterpolacionNewton.main(args); break;
+          case "3": PolinomioNewton.main(args); break;
           case "4": GaussJordan.main(args); break;
           case "5": GaussSeindel.main(args); break;
           case "6": PolinomioNewton.main(args); break;

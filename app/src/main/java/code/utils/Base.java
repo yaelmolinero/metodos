@@ -42,7 +42,7 @@ public class Base {
     System.out.println(Chalk.RESET);
   }
 
-  static void mostrarTabla(double[][] matriz, double[] x, double[] y) {
+  public static void mostrarTabla(double[][] matriz, double[] x, double[] y) {
     System.out.println();
     System.out.printf(
       Chalk.bold(Chalk.bgBlue("%-2s %-12s %-12s ")),

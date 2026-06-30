@@ -1,8 +1,9 @@
 package code.c4;
+import code.utils.Base;
 import code.utils.Chalk;
 import code.utils.Consola;
 
-public class PolinomioNewton {
+public class PolinomioNewton extends Base {
 
   public double evaluar(double[] xi, double[] fxi, double x) {
     int n = xi.length - 1;
@@ -20,9 +21,9 @@ public class PolinomioNewton {
     }
     
     showData(xi, fxi, x);
-    showMatrix(T, xi, fxi);
-    System.out.print(Chalk.BOLD + Chalk.BLUE);
-    // System.out.println("Pn(x) = [");
+    mostrarTabla(T, xi, fxi);
+
+    System.out.print(Chalk.BLUE);
     System.out.printf("Pn(x) = %.2f + ", fxi[0]);
     
     result += fxi[0];
@@ -39,12 +40,10 @@ public class PolinomioNewton {
       }
 
       if (i != (n - 1)) System.out.print(" + ");
-      // System.out.println();
 
       result += parte;
     }
 
-    // System.out.println("]\n");
     System.out.println();
     System.out.print(Chalk.RESET);
 
@@ -52,81 +51,38 @@ public class PolinomioNewton {
   }
 
   public static void main(String[] args) {
+    printTitle("Interpolación de Newton");
+    
     Consola consola = new Consola();
     double[] xValues = new double[3];
     double[] fxValues = new double[3];
 
-    showHeader();
-
     for (int i = 0; i < 3; i++ ) {
-      System.out.println("==== Coordenadas #" + (i + 1) + " ====");
+      System.out.println(Chalk.bgBlue("  Coordenadas #" + (i + 1) + "  "));
       xValues[i] = consola.getDouble("x: ");
       fxValues[i] = consola.getDouble("y: ");
 
       System.out.println();
     }
 
-    consola.sc.nextLine();
     int x = consola.getInteger("Ingrese el valor para la comprobación", 1);
     
     double result = new PolinomioNewton().evaluar(xValues, fxValues, x);
-    System.out.println(Chalk.bgGreen("     Pnx = " + result + "     "));
-  }
-
-  static void showHeader() {
-    System.out.print(Chalk.bold(Chalk.blue(
-      "----------------------------------------------\n" + 
-      "----------- Interpolación de Newton ----------\n" +
-      "----------------------------------------------\n"
-    )));
+    System.out.println(Chalk.bgGreen("   Pnx = " + result + "   "));
   }
 
   static void showData(double[] xi, double[] fxi, double x) {
-    System.out.println("==== Datos ==== \n");
-
-    System.out.print("Coordenadas: ");
-    for (int i = 0; i < xi.length; i++) {
-      System.out.printf("(%.0f, %.0f)", xi[i], fxi[i]);
-      if (i < xi.length - 1) System.out.print(", ");
-    }
     System.out.println();
+    System.out.print(Chalk.bgWhite("  Datos  ") + "\n");
+
+    mostrarCoordenadas(xi, fxi);
     System.out.println("x = " + x);
     System.out.println();
 
     for (int i = 0; i < xi.length; i++) {
-      System.out.printf("x[%d] = %.2f f[%d] = %.2f \n", i, xi[i], i, fxi[i]);
+      System.out.printf("x[%d] = %-6.2f f[%d] = %-6.2f \n", i, xi[i], i, fxi[i]);
     }
 
-    System.out.println();
-  }
-
-  static void showMatrix(double[][] matriz, double[] x, double[] y) {
-    System.out.println();
-    System.out.printf(
-      Chalk.bold(Chalk.bgBlue("%-2s %-8s %-8s ")),
-      "j", "Xi", "f(Xi)"
-    );
-
-    for (int i = 0; i < matriz[0].length; i ++) {
-      System.out.printf(
-        Chalk.bold(Chalk.bgBlue("%-8s ")),
-        "#" + i + "f(Xi)"
-      );
-    }
-    System.out.println();
-
-    for (int i = 0; i < matriz.length; i++) {
-      System.out.printf("%-2d %-8.2f %-8.2f ", i, x[i], y[i]);
-
-      double[] fila = matriz[i];
-      int n = fila.length;
-
-      for (int j = 0; j < n; j++) {
-        System.out.printf("%-8.2f ", fila[j]);
-      }
-
-      System.out.println();
-    }
     System.out.println();
   }
 }
