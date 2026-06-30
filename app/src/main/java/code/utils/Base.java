@@ -81,4 +81,19 @@ public class Base {
     }
     System.out.println();
   }
+
+  public static void mostrarDatos(double[] xi, double[] fxi, double x) {
+    System.out.println();
+    System.out.print(Chalk.bgWhite("  Datos  ") + "\n");
+
+    mostrarCoordenadas(xi, fxi);
+    System.out.println("x = " + x);
+    System.out.println();
+
+    for (int i = 0; i < xi.length; i++) {
+      System.out.printf("x[%d] = %-6.2f f[%d] = %-6.2f \n", i, xi[i], i, fxi[i]);
+    }
+
+    System.out.println();
+  }
 }

@@ -20,7 +20,7 @@ public class PolinomioNewton extends Base {
       }
     }
     
-    showData(xi, fxi, x);
+    mostrarDatos(xi, fxi, x);
     mostrarTabla(T, xi, fxi);
 
     System.out.print(Chalk.BLUE);
@@ -69,20 +69,5 @@ public class PolinomioNewton extends Base {
     
     double result = new PolinomioNewton().evaluar(xValues, fxValues, x);
     System.out.println(Chalk.bgGreen("   Pnx = " + result + "   "));
-  }
-
-  static void showData(double[] xi, double[] fxi, double x) {
-    System.out.println();
-    System.out.print(Chalk.bgWhite("  Datos  ") + "\n");
-
-    mostrarCoordenadas(xi, fxi);
-    System.out.println("x = " + x);
-    System.out.println();
-
-    for (int i = 0; i < xi.length; i++) {
-      System.out.printf("x[%d] = %-6.2f f[%d] = %-6.2f \n", i, xi[i], i, fxi[i]);
-    }
-
-    System.out.println();
   }
 }
