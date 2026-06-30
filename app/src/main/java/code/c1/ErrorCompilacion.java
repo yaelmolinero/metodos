@@ -6,6 +6,6 @@ public class ErrorCompilacion {
     int Sum = a + b;
 
     // Error al llamar la variable Sum
-    System.out.println("La suma de las variables es: " + Sum);
+    System.out.println("La suma de las variables es: " + sum);
   }
 }

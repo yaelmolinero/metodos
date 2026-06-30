@@ -32,7 +32,7 @@ public class CompilarError {
       System.out.println("Errores de compilación:");
       for (Diagnostic<?> d : diagnosticos.getDiagnostics()) {
         System.out.println("-------------------");
-        System.out.println("Línea: " + d.getLineNumber());
+        System.out.println("Línea: " + d.getLineNumber() + ", Columna: " + d.getColumnNumber());
         System.out.println("Mensaje: " + d.getMessage(null));
         System.out.println("Código: " + d.getCode());
       }

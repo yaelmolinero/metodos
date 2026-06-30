@@ -5,11 +5,6 @@ import code.utils.Base;
 import code.utils.Chalk;
 
 public class GaussSeindel extends Base {
-  double[][] matrizDefualt = {
-    { 6, -4, 2, 4 },
-    { 2, 8, -2, 12 },
-    { 14, 10, -14, -18 }
-  };
 
   public double[][] evaluar(double[][] matriz, int maxIteraciones, double tolerancia) {
     int n = matriz.length;
@@ -18,14 +13,13 @@ public class GaussSeindel extends Base {
     double[] x = new double[n]; // Valores iniciales
     double[] prevX = new double[n];
     
-    System.out.println("Tolerancia: " + tolerancia);
-    System.out.println("Iteraciones máximas: " + maxIteraciones);
     System.out.println();
+    System.out.println(Chalk.bgWhite("  Matriz inicial:  "));
     mostrarMatriz(matriz);
 
     for (int k = 0; k < maxIteraciones; k++) {
-      System.out.println("-".repeat(52));
-      System.out.printf(Chalk.bgBlue("  I = %d  ") + "\n\n", k);
+      System.out.println("-".repeat(60));
+      System.out.printf(Chalk.bgWhite("  I = %d  ") + "\n\n", k);
       // Copia los valores actuales de x a prevX
       System.arraycopy(x, 0, prevX, 0, n);
 
@@ -36,7 +30,6 @@ public class GaussSeindel extends Base {
           if (i != j)
             suma += redondear(matriz[i][j] * x[j]);
         }
-        System.out.printf(Chalk.purple("%f") + "\n", suma);
 
         System.out.printf(
           "X%d = (M%d%d - suma) / A%d%d = (%f - %f) / %f = %f \n",
@@ -44,7 +37,6 @@ public class GaussSeindel extends Base {
         );
 
         x[i] = redondear((matriz[i][n] - suma) / matriz[i][i]);
-        System.out.printf(Chalk.cyan("%f") + "\n", x[i]);
       }
 
       System.out.println();
@@ -65,14 +57,14 @@ public class GaussSeindel extends Base {
       }
 
       ok = verificarTolerancia(x, prevX, tolerancia);
-      if (ok)
-        break;
+      if (ok) break;
     }
 
+    System.out.println();
     if (!ok)
-      System.out.println("No se Encontro la Solucion");
+      System.out.println(Chalk.bold(Chalk.red("No se encontro la solución")));
     else {
-      System.out.println("Convergio por tolerancia");
+      // System.out.println("Convergio por tolerancia");
       for (int i = 0; i < n; i++) {
         System.out.printf(
           Chalk.bgGreen("  x%d = %f  ") + "\n",
@@ -106,13 +98,20 @@ public class GaussSeindel extends Base {
   }
 
   public static void main(String[] args) {
-    printTitle("Método de Gauss-Seindel");
+    printTitle("Método Gauss-Seindel");
+
     Consola consola = new Consola();
     GaussSeindel run = new GaussSeindel();
 
     run.muestraDefault();
     if (consola.getBoolean("Usar sistema de ecuaciones por defecto")) {
-      run.evaluar(run.matrizDefualt, 9, 0.01);
+      final double[][] matrizDefualt = {
+        { 6, -4, 2, 4 },
+        { 2, 8, -2, 12 },
+        { 14, 10, -14, -18 }
+      };
+
+      run.evaluar(matrizDefualt, 9, 0.01);
       return;
     }
 
