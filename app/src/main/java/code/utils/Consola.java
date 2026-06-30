@@ -82,6 +82,7 @@ public class Consola extends Base {
       }
     }
 
+    System.out.println();
     return matriz;
   }
 
